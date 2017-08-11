@@ -1,3 +1,5 @@
+// Geeting to know the argument vector.
+
 #include <stdio.h>
 
 int main(int argc, char ** argv) {
