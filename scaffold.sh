@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
   echo ""
 
   echo "clean:"
-  echo -e "\t rm *.out *.o *.exe || exit 0"
+  echo -e "\t rm *.out *.o *.exe *.gch || exit 0"
   echo ""
 
   echo "run:"
