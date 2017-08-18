@@ -10,4 +10,4 @@ two_sum.exe: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
-	rm *.o *.exe
+	rm *.o *.exe *.gch
