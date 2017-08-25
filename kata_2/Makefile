@@ -18,4 +18,4 @@ run:
 	 gcc -c ransom_note.c
 	 gcc -c main.c
 	 gcc -o main.exe ransom_note.o main.o
-	 ./main
+	 ./main.exe

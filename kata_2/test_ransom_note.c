@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "minunit.h"
 #include "ransom_note.h"
 
@@ -15,7 +16,7 @@
 int testsRun = 0;
 
 static char * testUnit() {
-    char * ransom_note_test = "holaamigos";
+    char  *ransom_note_test = strdup("holaamigos");
     char * magazine_test = "alohsogmia";
     int result = canConstruct(ransom_note_test, magazine_test);
     muAssert("error, testUnit 1 != 1", result == 1);
