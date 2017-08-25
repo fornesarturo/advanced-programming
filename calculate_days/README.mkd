@@ -1,5 +1,5 @@
 
-# two_sum_folder
+# calculate_days
 
 # How to compile
 make run

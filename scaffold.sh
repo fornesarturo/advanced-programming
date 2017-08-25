@@ -95,9 +95,9 @@ echo "#include <stdlib.h>
 /* Add function signatures here */
 
 int main(int argc, char **argv) {
-  /* Start your code here */
-  printf(\"Hello from main\\n\");
-  return 0;
+    /* Start your code here */
+    printf(\"Hello from main\\n\");
+    return 0;
 }" > main.c
 
 {
@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
   # http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
   echo -e "\t gcc -c ${MODULE_NAME}.c"
   echo -e "\t gcc -c main.c"
-  echo -e "\t gcc -o main ${MODULE_NAME}.o main.o"
+  echo -e "\t gcc -o main.exe ${MODULE_NAME}.o main.o"
   echo ""
 
   echo "test_${MODULE_NAME}: clean"
@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
   echo -e "\t gcc -c ${MODULE_NAME}.c"
   echo -e "\t gcc -c main.c"
   echo -e "\t gcc -o main.exe ${MODULE_NAME}.o main.o"
-  echo -e "\t ./main"
+  echo -e "\t ./main.exe"
 
 } > Makefile
 
@@ -159,35 +159,35 @@ int main(int argc, char **argv) {
 
   echo ""
   echo 'static char * testUnit() {'
-  echo '  muAssert("error, testUnit 1 != 1", 1 == 1);'
-  echo '  return 0;'
+  echo '    muAssert("error, testUnit 1 != 1", 1 == 1);'
+  echo '    return 0;'
   echo '}'
 
   echo ""
   echo 'static char * allTests() {'
-  echo '  muRunTest(testUnit);'
-  echo '  return 0;'
+  echo '    muRunTest(testUnit);'
+  echo '    return 0;'
   echo '}'
 
   echo ""
   echo 'int main(int argc, char **argv) {'
-  echo '  char *result = allTests();'
-  echo '  if (result != 0) {'
-  echo '    printf("-_-_-_-_-_-_-_,------,      o \n");'
-  echo '    printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");'
-  echo '    printf("-_-_-_-_-_-_-~|__( X .X)  +     + \n");'
-  echo '    printf("_-_-_-_-_-_-_- \"\"  \"\" \n");'
-  echo '    printf(KRED "✗ %s \n" RESET, result);';
-  echo '  }'
-  echo '  else {'
-  echo '    printf("-_-_-_-_-_-_-_,------,      o \n");'
-  echo '    printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");'
-  echo '    printf("-_-_-_-_-_-_-~|__( ^ .^)  +     + \n");'
-  echo '    printf("_-_-_-_-_-_-_-  \"\"  \"\" \n");'
-  echo '    printf(KGRN " ✓ ALL TESTS PASSED \n" RESET);'
-  echo '  }'
-  echo '  printf("Tests run: %d\n", testsRun);'
-  echo '  return result != 0;'
+  echo '    char *result = allTests();'
+  echo '    if (result != 0) {'
+  echo '      printf("-_-_-_-_-_-_-_,------,      o \n");'
+  echo '      printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");'
+  echo '      printf("-_-_-_-_-_-_-~|__( X .X)  +     + \n");'
+  echo '      printf("_-_-_-_-_-_-_- \"\"  \"\" \n");'
+  echo '      printf(KRED "✗ %s \n" RESET, result);';
+  echo '    }'
+  echo '    else {'
+  echo '      printf("-_-_-_-_-_-_-_,------,      o \n");'
+  echo '      printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");'
+  echo '      printf("-_-_-_-_-_-_-~|__( ^ .^)  +     + \n");'
+  echo '      printf("_-_-_-_-_-_-_-  \"\"  \"\" \n");'
+  echo '      printf(KGRN " ✓ ALL TESTS PASSED \n" RESET);'
+  echo '    }'
+  echo '    printf("Tests run: %d\n", testsRun);'
+  echo '    return result != 0;'
   echo '}'
 
 } > test_${MODULE_NAME}.c
