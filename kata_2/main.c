@@ -8,14 +8,10 @@
 int main(int argc, char **argv) {
     /* Start your code here */
     printf("Hello from main\n");
-    char * src = "Hey";
-    char * dest;
 
-    strcpy(dest, src);
-
-    printf("%s\n",dest);
-
-    free(dest);
-    free(src);
+    char * note = "help me pls";
+    char * magazine = "slpemhel";
+    int result = can_construct(note, magazine);
+    printf("Result is: %d\n", result);
     return 0;
 }

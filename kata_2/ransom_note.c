@@ -12,7 +12,7 @@
   * @param:
   *  int: 1 | 0
 */
-int canConstruct(char * ransom_note, char * magazine) {
+int can_construct(char * ransom_note, char * magazine) {
     char * copy_ransom;
     copy_ransom = strdup(ransom_note);
     char * current;

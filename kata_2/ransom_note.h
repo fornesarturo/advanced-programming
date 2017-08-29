@@ -1,1 +1,1 @@
-int canConstruct(char *, char *);
+int can_construct(char *, char *);
