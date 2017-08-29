@@ -16,10 +16,10 @@
 int testsRun = 0;
 
 static char * testUnit() {
-    char  *ransom_note_test = strdup("holaamigos");
+    char  *ransom_note_test = "hola amigoso";
     char * magazine_test = "alohsogmia";
     int result = canConstruct(ransom_note_test, magazine_test);
-    muAssert("error, testUnit 1 != 1", result == 1);
+    muAssert("error, testUnit 1 != 1", result == 0);
     return 0;
 }
 
