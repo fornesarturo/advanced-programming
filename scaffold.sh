@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Scafold for a basic c program
+# Scafold for a basic c program. Receives two arguments, first is the folder,
+# then is the module name.
 # TODO: Add a program with a module. The module itself has
 # to have a test and the program as well.
 # TODO: bash c-scafold <program-name> <module-name>
@@ -49,39 +50,47 @@ touch minunit.h
 touch test_${MODULE_NAME}.c
 touch Makefile
 touch main.c
-touch README.mkd
+touch README.md
 
 echo "
 # ${PROJECT_NAME}
 
-# How to compile
+### How to compile
+\`\`\`bash
 make run
+\`\`\`
 
-# How to run test
+### How to run test
+\`\`\`bash
 make test
+\`\`\`
 
-# How to debug the program
+### How to debug the program
+\`\`\`bash
 gcc -g name_of_file.c -o name_of_file
 gdb name_of_file
+\`\`\`
 
-## How to start the Program
-break main
-run # Execute the program
-next # Next Line
-print &i # Print the address of the variable
-print sizeof(int) # Print sizeof the int type
-x/4xb &i # Get the raw bytes of i. I want to examinate 4 values formatted as hex numerals. byte by byte
-ptype i # Tell me the type of c expression
-x/12xb &a # a is an array
+#### How to start the Program
+* break main
+* run - Execute the program
+* next - Next Line
+* print &i - Print the address of the variable
+* print sizeof(int) - Print sizeof the int type
+* x/4xb &i - Get the raw bytes of i. I want to examinate 4 values formatted as hex numerals. byte by byte
+* ptype i - Tell me the type of c expression
+* x/12xb &a - a is an array
 
-# Linking stuff and generating the program
+### Linking stuff and generating the program
 
 If you have modules you have to compile one by one
+\`\`\`bash
 gcc -c module1.c # This command generates module1.o
 gcc -c program-that-depends-of-module1.c
 gcc -o program.out module1.o program-that-depends-of-module1.o
 ./program.out
-" > README.mkd
+\`\`\`
+" > README.md
 
 echo "#include <stdlib.h>
 #include <stdio.h>
