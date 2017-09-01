@@ -9,7 +9,7 @@
   * @param:
   *  ransom_note: the message that was formed
   *  magazine: the letters that are available
-  * @param:
+  * @return:
   *  int: 1 | 0
 */
 int can_construct(char * ransom_note, char * magazine) {
