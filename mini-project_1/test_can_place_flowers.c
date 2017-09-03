@@ -14,13 +14,18 @@
 
 int tests_run = 0;
 
-static char * test_unit() {
-    mu_assert("error, testUnit 1 != 1", 1 == 1);
+static char * test_base_case() {
+    int flowerbed_base[] = {1,0,0};
+    int flowerbed_base_size = 3;
+    int n = 1;
+    int result;
+    result = can_place_flowers(flowerbed_base, flowerbed_base_size, n);
+    mu_assert("Base case should be true", result == 1);
     return 0;
 }
 
 static char * all_tests() {
-    mu_run_test(test_unit);
+    mu_run_test(test_base_case);
     return 0;
 }
 

@@ -19,5 +19,5 @@
   *     int: 1 | 0
 */
 int can_place_flowers(int * flowerbed, int flowerbed_size, int n) {
-    
+    return 0;
 }
