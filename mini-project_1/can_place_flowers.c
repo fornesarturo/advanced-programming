@@ -30,15 +30,14 @@ int can_place_flowers(int * flowerbed, int flowerbed_size, int n) {
             continue;
         }
         // Current ground is empty, so check for the no-adjacent-flowers rule.
+        // If we're at the edge, just "place" a flower.
         else if (index == flowerbed_size - 1 || !flowerbed[index + 1]) {
             n--;
             index += 2;
             continue;
         }
         // Current ground is empty, but there's a flower up-next, move 3 spaces.
-        else {
-            index += 3;
-        }
+        index += 3;
     }
 
     if (n > 0) {
