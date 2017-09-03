@@ -24,8 +24,28 @@ static char * test_base_case() {
     return 0;
 }
 
+static char * test_base_case_2() {
+    int flowerbed_base[] = {1,0,0,1};
+    int flowerbed_base_size = 4;
+    int n = 1;
+    int result;
+    result = can_place_flowers(flowerbed_base, flowerbed_base_size, n);
+    mu_assert("Base case should be false", result == 0);
+    return 0;
+}
+
+static char * test_edge_case() {
+    int flowerbed[] = {0,0,1,0,0};
+    int flowerbed_size = 5;
+    int n = 2;
+    int result;
+    result = can_place_flowers(flowerbed, flowerbed_size, n);
+    mu_assert("Base case should be false", result == 1);
+    return 0;
+}
+
 static char * all_tests() {
-    mu_run_test(test_base_case);
+    mu_run_test(test_edge_case);
     return 0;
 }
 
