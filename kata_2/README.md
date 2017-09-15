@@ -1,6 +1,10 @@
 
 # Ransom Note
 
+Receives two char * (strings) and returns whether the first char * can be formed with the letters in the second char *
+
+****
+
 ### How to compile
 ```bash
 make run

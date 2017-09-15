@@ -9,5 +9,9 @@ OBJ = last_word_len.o last_word_len_main.o
 last_word_len.exe: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
+run: $(OBJ)
+	$(CC) -o last_word_len.exe $^ $(CFLAGS)
+	./last_word_len.exe
+
 clean:
 	rm *.o *.exe *.gch
