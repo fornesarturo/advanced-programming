@@ -56,18 +56,25 @@ void upsert_dict (Dictionary *dictionary, char *key, void *value, int size, int 
 }
 
 void * get_dict (Dictionary *dictionary,char *key,int size, int *error_code) {
-    if (dictionary == NULL || dictionary->elements == NULL || key == NULL || size <= 0)
-    {
+    if (dictionary == NULL || dictionary->elements == NULL || key == NULL || size <= 0) {
         *error_code = 100;
         return NULL;
     }
+    * error_code = 0;
 
     int index = hash(key, dictionary->size);
+    if (dictionary->elements[index].key == 0) {
+        return NULL;
+    }
     void *result = malloc(size);
-    if(result == NULL){
+    if (result == NULL) {
         *error_code = 100;
         return NULL;
     }
-    memcpy(result, dictionary->elements[index].value,size);
+    printf("I'm the same!\n");
+    memcpy(result, dictionary->elements[index].value, size);
+    if (result == NULL || dictionary->elements[index].value == NULL) {
+        return NULL;
+    }
     return result;
 }

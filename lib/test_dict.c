@@ -51,10 +51,24 @@ static char *test_get_dictionary () {
     return 0;
 }
 
+static char *test_get_dictionary_null () {
+    unsigned int size = 100;
+    int error_code;
+    Dictionary *my_dictionary = init_dict(size, &error_code);
+    int value = 1;
+    upsert_dict(my_dictionary, "uno", (void *) &value, sizeof(int), &error_code);
+    void *result = get_dict(my_dictionary, "dos", sizeof(int), &error_code);
+    value = 27;
+    mu_assert("my_dictionary error_code must be 0", error_code == 0);
+    mu_assert("result must be equal to NULL", result == NULL);
+    return 0;
+}
+
 static char *all_tests () {
     mu_run_test(test_init_dictionary);
     mu_run_test(test_upsert_dictionary);
     mu_run_test(test_get_dictionary);
+    mu_run_test(test_get_dictionary_null);
     return 0;
 }
 
