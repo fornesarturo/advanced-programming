@@ -71,7 +71,6 @@ void * get_dict (Dictionary *dictionary,char *key,int size, int *error_code) {
         *error_code = 100;
         return NULL;
     }
-    printf("I'm the same!\n");
     memcpy(result, dictionary->elements[index].value, size);
     if (result == NULL || dictionary->elements[index].value == NULL) {
         return NULL;
