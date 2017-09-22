@@ -9,6 +9,6 @@ typedef struct dict {
     unsigned int used;
 } Dictionary;
 
-Dictionary * init_dict (unsigned int, int *);
-
-void upsert_dict(Dictionary *, char *, void *, int *);
+Dictionary * init_dict(unsigned int,int *);
+void upsert_dict(Dictionary *, char *,void *,int,int *);
+void * get_dict(Dictionary *,char *, int, int *);

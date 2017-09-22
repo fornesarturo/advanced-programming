@@ -16,33 +16,45 @@
 
 int tests_run = 0;
 
-static char * test_init_dict() {
+static char *test_init_dictionary () {
     unsigned int size = 4;
     int error_code;
-    Dictionary * my_dict = init_dict(size, &error_code);
-    mu_assert("Dictionary size must be 4", my_dict->size == size);
-    mu_assert("Used elements must be 0", my_dict->used == 0);
-    mu_assert("Error code must be 0", error_code == 0);
-    free(my_dict);
+    Dictionary *my_dictionary = init_dict(size, &error_code);
+    mu_assert("my_dictionary size must be 4", my_dictionary->size == 4);
+    mu_assert("my_Dictionary errorCode must be 0", error_code == 0);
     return 0;
 }
 
-static char * test_upsert_dict() {
+static char *test_upsert_dictionary () {
     unsigned int size = 1;
     int error_code;
-    Dictionary * my_dict = init_dict(size, &error_code);
+    Dictionary *my_dictionary = init_dict(size, &error_code);
     int value = 1;
-    upsert_dict(my_dict, "uno", (void *) &value, &error_code);
-    mu_assert("Error code must be 0", error_code == 0);
-    mu_assert("my_dict->elements[0].key must contain element with key \"uno\"", strcmp(my_dict->elements[0].key, "uno") == 0);
-    mu_assert("my_dict->elements[0].key must contain element with value 1", * ((int *) my_dict->elements[0].value) == value);
-    free(my_dict);
+    upsert_dict(my_dictionary, "uno", (void *) &value, sizeof(int), &error_code);
+    mu_assert("my_dictionary error_code must be 0", error_code == 0);
+    mu_assert("my_dictionary error_code must be 0", strcmp(my_dictionary->elements[0].key, "uno") == 0);
+    mu_assert("my_dictionary error_code must be 0", *((int *) my_dictionary->elements[0].value) == value);
     return 0;
 }
 
-static char * all_tests() {
-    mu_run_test(test_init_dict);
-    mu_run_test(test_upsert_dict);
+static char *test_get_dictionary () {
+    unsigned int size = 1;
+    int error_code;
+    Dictionary *my_dictionary = init_dict(size, &error_code);
+    int value = 1;
+    upsert_dict(my_dictionary, "uno", (void *) &value, sizeof(int), &error_code);
+    void *result = get_dict(my_dictionary, "uno", sizeof(int), &error_code);
+    value = 27;
+    mu_assert("my_dictionary error_code must be 0", error_code == 0);
+    printf("%d\n", *((int *)result));
+    mu_assert("result must be equal to value", *((int *) result) == 1);
+    return 0;
+}
+
+static char *all_tests () {
+    mu_run_test(test_init_dictionary);
+    mu_run_test(test_upsert_dictionary);
+    mu_run_test(test_get_dictionary);
     return 0;
 }
 

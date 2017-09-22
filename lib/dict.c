@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "dict.h"
 
 /** init_dict
@@ -37,28 +38,36 @@ static unsigned int hash (char *s, unsigned int size) {
     return hashval % size;
 }
 
-void upsert_dict (Dictionary * dict, char * key, void * value, int * error_code) {
-    if (dict == NULL || key == NULL || value == NULL || dict->elements == NULL) {
+void upsert_dict (Dictionary *dictionary, char *key, void *value, int size, int *error_code) {
+    if (dictionary == NULL || dictionary->elements == NULL || key == NULL || value == NULL || size <= 0) {
         *error_code = 100;
         return;
     }
-    if (dict->used == dict->size) {
-        *error_code = 500;
+
+    int index = hash(key, dictionary->size);
+    dictionary->elements[index].key = key;
+    dictionary->elements[index].value = malloc(size);
+    if(dictionary->elements[index].value == NULL){
+        *error_code = 100;
         return;
     }
-    unsigned int index = hash(key, dict->size);
-    if (dict->elements[index].key == NULL) {
-        dict->elements[index].key = key;
-        dict->elements[index].value = value;
-        dict->used += 1;
-    } else {
-        while(dict->elements[++index].key == NULL) {
-            dict->elements[index].key = key;
-            dict->elements[index].value = value;
-            dict->used += 1;
-        }
+    memcpy(dictionary->elements[index].value, value,size);
+    *error_code = 0;
+}
+
+void * get_dict (Dictionary *dictionary,char *key,int size, int *error_code) {
+    if (dictionary == NULL || dictionary->elements == NULL || key == NULL || size <= 0)
+    {
+        *error_code = 100;
+        return NULL;
     }
 
-    *error_code = 0;
-
+    int index = hash(key, dictionary->size);
+    void *result = malloc(size);
+    if(result == NULL){
+        *error_code = 100;
+        return NULL;
+    }
+    memcpy(result, dictionary->elements[index].value,size);
+    return result;
 }
