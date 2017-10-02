@@ -13,44 +13,31 @@
 #define RESET "[0m"
 
 int tests_run = 0;
-
 static char * test_unit() {
-    mu_assert("error, testUnit 1 != 1", 1 == 1);
-    return 0;
+	mu_assert("error, testUnit 1 != 1", 1 != 1);
+	return 0;
 }
 
 static char * all_tests() {
-    mu_run_test(test_unit);
-    return 0;
+	mu_run_test(test_unit);
+	return 0;
 }
-
 int main(int argc, char **argv) {
-    char *result = all_tests();
-    if (result != 0) {
-      printf("-_-_-_-_-_-_-_,------,      o 
-");
-      printf("_-_-_-_-_-_-_-|   /\_/\ 
-");
-      printf("-_-_-_-_-_-_-~|__( X .X)  +     + 
-");
-      printf("_-_-_-_-_-_-_- \"\"  \"\" 
-");
-      printf(KRED "✗ %s 
-" RESET, result);
-    }
-    else {
-      printf("-_-_-_-_-_-_-_,------,      o 
-");
-      printf("_-_-_-_-_-_-_-|   /\_/\ 
-");
-      printf("-_-_-_-_-_-_-~|__( ^ .^)  +     + 
-");
-      printf("_-_-_-_-_-_-_-  \"\"  \"\" 
-");
-      printf(KGRN " ✓ ALL TESTS PASSED 
-" RESET);
-    }
-    printf("Tests run: %d
-", tests_run);
-    return result != 0;
+	char *result = all_tests();
+	if (result != 0) {
+		printf("-_-_-_-_-_-_-_,------,      o \n");
+		printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");
+		printf("-_-_-_-_-_-_-~|__( X .X)  +     + \n");
+		printf("_-_-_-_-_-_-_- \"\"  \"\" \n");
+		printf(KRED "✗  \n" RESET, result);
+	}
+	else {
+		printf("-_-_-_-_-_-_-_,------,      o \n");
+		printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");
+		printf("-_-_-_-_-_-_-~|__( ^ .^)  +     + \n");
+		printf("_-_-_-_-_-_-_-  \"\"  \"\" \n");
+		printf(KGRN " ✓ ALL TESTS PASSED \n" RESET);
+	}
+	printf("Tests run: 0\n", tests_run);
+	return result != 0;
 }

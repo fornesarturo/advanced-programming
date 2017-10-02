@@ -6,7 +6,6 @@
 
 int main(int argc, char **argv) {
     /* Start your code here */
-    printf("Hello from main
-");
+    printf("Hello from main\n");
     return 0;
 }
