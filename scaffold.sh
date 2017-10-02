@@ -105,39 +105,39 @@ echo "#include <stdlib.h>
 
 int main(int argc, char **argv) {
     /* Start your code here */
-    printf(\"Hello from main\\n\");
+    printf(\"Hello from main\\\\n\");
     return 0;
 }" > main.c
 
 {
-  echo "all:"
+  printf "all:\n"
   # Make command complains about spaces :(
   # fix: http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
   # http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
-  echo -e "\t gcc -c ${MODULE_NAME}.c"
-  echo -e "\t gcc -c main.c"
-  echo -e "\t gcc -o main.exe ${MODULE_NAME}.o main.o"
-  echo ""
+  printf "\t gcc -c ${MODULE_NAME}.c\n"
+  printf "\t gcc -c main.c\n"
+  printf "\t gcc -o main.exe ${MODULE_NAME}.o main.o\n"
+  printf "\n"
 
-  echo "test_${MODULE_NAME}: clean"
-  echo -e "\t gcc -c ${MODULE_NAME}.c"
-  echo -e "\t gcc -c test_${MODULE_NAME}.c"
-  echo -e "\t gcc -o test_${MODULE_NAME}.exe ${MODULE_NAME}.o test_${MODULE_NAME}.o"
-  echo -e "\t ./test_${MODULE_NAME}.exe"
-  echo ""
+  printf "test_${MODULE_NAME}: clean\n"
+  printf "\t gcc -c ${MODULE_NAME}.c\n"
+  printf "\t gcc -c test_${MODULE_NAME}.c\n"
+  printf "\t gcc -o test_${MODULE_NAME}.exe ${MODULE_NAME}.o test_${MODULE_NAME}.o\n"
+  printf "\t ./test_${MODULE_NAME}.exe\n"
+  printf "\n"
 
-  echo -e "test:\t test_${MODULE_NAME}"
-  echo ""
+  printf "test:\t test_${MODULE_NAME}\n"
+  printf "\n"
 
-  echo "clean:"
-  echo -e "\t rm *.out *.o *.exe *.gch || exit 0"
-  echo ""
+  printf "clean:\n"
+  printf "\t rm *.out *.o *.exe *.gch || exit 0\n"
+  printf "\n"
 
-  echo "run:"
-  echo -e "\t gcc -c ${MODULE_NAME}.c"
-  echo -e "\t gcc -c main.c"
-  echo -e "\t gcc -o main.exe ${MODULE_NAME}.o main.o"
-  echo -e "\t ./main.exe"
+  printf "run:\n"
+  printf "\t gcc -c ${MODULE_NAME}.c\n"
+  printf "\t gcc -c main.c\n"
+  printf "\t gcc -o main.exe ${MODULE_NAME}.o main.o\n"
+  printf "\t ./main.exe\n"
 
 } > Makefile
 
@@ -150,54 +150,54 @@ int main(int argc, char **argv) {
 } >  minunit.h
 
 {
-  echo '#include <stdio.h>'
-  echo '#include "minunit.h"'
-  echo "#include \"${MODULE_NAME}.h\""
-  echo ""
-  echo '#define KNRM  "\x1B[0m"'
-  echo '#define KRED  "\x1B[31m"'
-  echo '#define KGRN  "\x1B[32m"'
-  echo '#define KYEL  "\x1B[33m"'
-  echo '#define KBLU  "\x1B[34m"'
-  echo '#define KMAG  "\x1B[35m"'
-  echo '#define KCYN  "\x1B[36m"'
-  echo '#define KWHT  "\x1B[37m"'
-  echo '#define RESET "\033[0m"'
-  echo ""
-  echo 'int tests_run = 0;'
+  printf "#include <stdio.h>\n"
+  printf "#include \"minunit.h\"\n"
+  printf "#include \"${MODULE_NAME}.h\"\n"
+  printf "\n"
+  printf "#define KNRM  \"\\x1B[0m\"\n"
+  printf "#define KRED  \"\\x1B[31m\"\n"
+  printf "#define KGRN  \"\\x1B[32m\"\n"
+  printf "#define KYEL  \"\\x1B[33m\"\n"
+  printf "#define KBLU  \"\\x1B[34m\"\n"
+  printf "#define KMAG  \"\\x1B[35m\"\n"
+  printf "#define KCYN  \"\\x1B[36m\"\n"
+  printf "#define KWHT  \"\\x1B[37m\"\n"
+  printf "#define RESET \"\\033[0m\"\n"
+  printf "\n"
+  printf "int tests_run = 0;"
 
-  echo ""
-  echo 'static char * test_unit() {'
-  echo '    mu_assert("error, testUnit 1 != 1", 1 == 1);'
-  echo '    return 0;'
-  echo '}'
+  printf "\n"
+  printf "static char * test_unit() {\n"
+  printf "\tmu_assert(\"error, testUnit 1 != 1\", 1 == 1);\n"
+  printf "\treturn 0;\n"
+  printf "}\n"
 
-  echo ""
-  echo 'static char * all_tests() {'
-  echo '    mu_run_test(test_unit);'
-  echo '    return 0;'
-  echo '}'
+  printf "\n"
+  printf "static char * all_tests() {\n"
+  printf "\tmu_run_test(test_unit);\n"
+  printf "\treturn 0;\n"
+  printf "}\n"
 
-  echo ""
-  echo 'int main(int argc, char **argv) {'
-  echo '    char *result = all_tests();'
-  echo '    if (result != 0) {'
-  echo '      printf("-_-_-_-_-_-_-_,------,      o \n");'
-  echo '      printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");'
-  echo '      printf("-_-_-_-_-_-_-~|__( X .X)  +     + \n");'
-  echo '      printf("_-_-_-_-_-_-_- \"\"  \"\" \n");'
-  echo '      printf(KRED "✗ %s \n" RESET, result);';
-  echo '    }'
-  echo '    else {'
-  echo '      printf("-_-_-_-_-_-_-_,------,      o \n");'
-  echo '      printf("_-_-_-_-_-_-_-|   /\\_/\\ \n");'
-  echo '      printf("-_-_-_-_-_-_-~|__( ^ .^)  +     + \n");'
-  echo '      printf("_-_-_-_-_-_-_-  \"\"  \"\" \n");'
-  echo '      printf(KGRN " ✓ ALL TESTS PASSED \n" RESET);'
-  echo '    }'
-  echo '    printf("Tests run: %d\n", tests_run);'
-  echo '    return result != 0;'
-  echo '}'
+  printf ""
+  printf "int main(int argc, char **argv) {\n"
+  printf "\tchar *result = all_tests();\n"
+  printf "\tif (result != 0) {\n"
+  printf "\t\tprintf(\"-_-_-_-_-_-_-_,------,      o \\\\n\");\n"
+  printf "\t\tprintf(\"_-_-_-_-_-_-_-|   /\\\\\\_/\\\\\\ \\\\n\");\n"
+  printf "\t\tprintf(\"-_-_-_-_-_-_-~|__( X .X)  +     + \\\\n\");\n"
+  printf "\t\tprintf(\"_-_-_-_-_-_-_- \\\\\"\\\\\"  \\\\\"\\\\\" \\\\n\");\n"
+  printf "\t\tprintf(KRED \"✗ %s \\\\n\" RESET, result);\n"
+  printf "\t}\n"
+  printf "\telse {\n"
+  printf "\t\tprintf(\"-_-_-_-_-_-_-_,------,      o \\\\n\");\n"
+  printf "\t\tprintf(\"_-_-_-_-_-_-_-|   /\\\\\\_/\\\\\\ \\\\n\");\n"
+  printf "\t\tprintf(\"-_-_-_-_-_-_-~|__( ^ .^)  +     + \\\\n\");\n"
+  printf "\t\tprintf(\"_-_-_-_-_-_-_-  \\\\\"\\\\\"  \\\\\"\\\\\" \\\\n\");\n"
+  printf "\t\tprintf(KGRN \" ✓ ALL TESTS PASSED \\\\n\" RESET);\n"
+  printf "\t}\n"
+  printf "\tprintf(\"Tests run: %d\\\\n\", tests_run);\n"
+  printf "\treturn result != 0;\n"
+  printf "}\n"
 
 } > test_${MODULE_NAME}.c
 
