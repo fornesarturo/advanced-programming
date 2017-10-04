@@ -37,8 +37,31 @@ static char * example_test() {
 	return 0;
 }
 
+static char * all_caps_test() {
+    char temp_input[7][8] = {"PORQUE", "TU", "Y", "YO", "NUESTRO", "HAS", "PERRO"};
+    int size = 7;
+    char **input = malloc(size * sizeof(char *));
+    for (int i = 0; i < size; i++) {
+        input[i] = malloc(256 * sizeof(char));
+        strcpy(input[i], temp_input[i]);
+    }
+    int return_size;
+    char **output = find_words(input, size, &return_size);
+    printf("Array of size: %d [", return_size);
+    for(int i = 0; i < return_size; i++) {
+        printf("%s", output[i]);
+        if (i < return_size - 1) {
+            printf(", ");
+        }
+    }
+    printf("]\n");
+	mu_assert("Wrong output!", output != NULL && output[0][0] == 'P' && output[1][0] == 'T' && output[2][0] == 'Y' && output[3][0] == 'Y' && output[4][0] == 'H' && output[5][0] == 'P');
+	return 0;
+}
+
 static char * all_tests() {
 	mu_run_test(example_test);
+	mu_run_test(all_caps_test);
 	return 0;
 }
 int main(int argc, char **argv) {

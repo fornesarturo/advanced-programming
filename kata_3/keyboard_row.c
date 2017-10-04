@@ -4,6 +4,15 @@
 #include <string.h>
 #include "keyboard_row.h"
 
+/** can_be_formed
+  * Receives two char * (strings) and returns whether the first char * can be
+  * formed with the letters in the second char *, repetition is allowed.
+  * @param:
+  *  word: the message that was formed
+  *  magazine: the letters that are available
+  * @return:
+  *  int: 1 | 0
+*/
 int can_be_formed(char * word, char * row) {
     char * copy_word;
     copy_word = strdup(word);
@@ -27,6 +36,21 @@ int can_be_formed(char * word, char * row) {
     return 1;
 }
 
+/** find_words
+  * Receives an array of char * (strings) and a pointer to the size of the
+  * result. It returns the words that can be formed using only a row of the
+  * standard US Keyboard layout.
+  * Notes:
+  *   - You may use one character in the keyboard more than once.
+  *   - You may assume the input string will only contain letters of alphabet.
+
+  * @param:
+  *  words: the input array of char *
+  *  words_size: the size of the char ** words
+  *  return_size: the direction in memory in which to save the result's size.
+  * @return:
+  *  char **: the words that can be formed.
+*/
 char** find_words (char** words, int words_size, int* return_size) {
     if (words == NULL || return_size == NULL) {
         return NULL;
@@ -45,68 +69,56 @@ char** find_words (char** words, int words_size, int* return_size) {
     int size_first = 10;
     int size_second = 9;
     int size_third = 7;
-    int sent = 0;
     int result;
 
     for (i = 0; i < words_size; i++) {
-        sent = 0;
-        // printf("Now working with word: %s\n", words[i]);
         first_char = tolower(words[i][0]);
-        // printf("Char is: %c\n", first_char);
-        // First row
-        for (j = 0; !sent && j < size_first; j++) {
-            // printf("\tRow char is: %c\n", first_row[j]);
+
+        // Traverse the three rows at the same time to see which row matches
+        // the first character.
+        for (j = 0; j < size_first; j++) {
+            if (j < size_second) {
+                if (first_char == second_row[j]) {
+                    result = can_be_formed(words[i], second_row);
+                    if (result) {
+                        result_counter++;
+                        formed_array[i] = 1;
+                        break;
+                    } else {
+                        formed_array[i] = 0;
+                    }
+
+                    break;
+                }
+            }
+            if (j < size_third) {
+                if (first_char == third_row[j]) {
+                    result = can_be_formed(words[i], third_row);
+                    if (result) {
+                        result_counter++;
+                        formed_array[i] = 1;
+                    } else {
+                        formed_array[i] = 0;
+                    }
+
+                    break;
+                }
+            }
+
             if (first_char == first_row[j]) {
-                // printf("\t\tIn first if!\n");
-                sent = 1;
                 result = can_be_formed(words[i], first_row);
                 if (result) {
-                    // printf("%s can be formed!\n", words[i]);
                     result_counter++;
                     formed_array[i] = 1;
                 } else {
-                    // printf("%s cannot be formed!\n", words[i]);
                     formed_array[i] = 0;
                 }
-            }
-        }
-        // Second row
-        for (j = 0; !sent && j < size_second; j++) {
-            // printf("\tRow char is: %c\n", first_row[j]);
-            if (first_char == second_row[j]) {
-                // printf("\t\tIn second if!\n");
-                sent = 1;
-                result = can_be_formed(words[i], second_row);
-                if (result) {
-                    // printf("%s can be formed!\n", words[i]);
-                    result_counter++;
-                    formed_array[i] = 1;
-                } else {
-                    // printf("%s cannot be formed!\n", words[i]);
-                    formed_array[i] = 0;
-                }
-            }
-        }
-        // Third row
-        for (j = 0; !sent && j < size_third; j++) {
-            // printf("\tRow char is: %c\n", first_row[j]);
-            if (first_char == third_row[j]) {
-                // printf("\t\tIn third if!\n");
-                sent = 1;
-                result = can_be_formed(words[i], third_row);
-                if (result) {
-                    // printf("%s can be formed!\n", words[i]);
-                    result_counter++;
-                    formed_array[i] = 1;
-                } else {
-                    // printf("%s cannot be formed!\n", words[i]);
-                    formed_array[i] = 0;
-                }
+
+                break;
             }
         }
     }
 
-    // printf("Now malloc-ing\n");
     result_array = (char **) malloc(result_counter * sizeof(char *));
     for (i = 0, j = 0; i < words_size && j < result_counter; i++) {
         if (formed_array[i]) {
@@ -115,7 +127,6 @@ char** find_words (char** words, int words_size, int* return_size) {
             j++;
         }
     }
-    // printf("Kind-of malloc-ed?\n");
     *return_size = result_counter;
 
     return result_array;
