@@ -154,15 +154,15 @@ int main(int argc, char **argv) {
   printf "#include \"minunit.h\"\n"
   printf "#include \"${MODULE_NAME}.h\"\n"
   printf "\n"
-  printf "#define KNRM  \"\\x1B[0m\"\n"
-  printf "#define KRED  \"\\x1B[31m\"\n"
-  printf "#define KGRN  \"\\x1B[32m\"\n"
-  printf "#define KYEL  \"\\x1B[33m\"\n"
-  printf "#define KBLU  \"\\x1B[34m\"\n"
-  printf "#define KMAG  \"\\x1B[35m\"\n"
-  printf "#define KCYN  \"\\x1B[36m\"\n"
-  printf "#define KWHT  \"\\x1B[37m\"\n"
-  printf "#define RESET \"\\033[0m\"\n"
+  echo '#define KNRM  "\x1B[0m"'
+  echo '#define KRED  "\x1B[31m"'
+  echo '#define KGRN  "\x1B[32m"'
+  echo '#define KYEL  "\x1B[33m"'
+  echo '#define KBLU  "\x1B[34m"'
+  echo '#define KMAG  "\x1B[35m"'
+  echo '#define KCYN  "\x1B[36m"'
+  echo '#define KWHT  "\x1B[37m"'
+  echo '#define RESET "\033[0m"'
   printf "\n"
   printf "int tests_run = 0;"
 
@@ -186,7 +186,7 @@ int main(int argc, char **argv) {
   printf "\t\tprintf(\"_-_-_-_-_-_-_-|   /\\\\\\_/\\\\\\ \\\\n\");\n"
   printf "\t\tprintf(\"-_-_-_-_-_-_-~|__( X .X)  +     + \\\\n\");\n"
   printf "\t\tprintf(\"_-_-_-_-_-_-_- \\\\\"\\\\\"  \\\\\"\\\\\" \\\\n\");\n"
-  printf "\t\tprintf(KRED \"✗ %s \\\\n\" RESET, result);\n"
+  printf "\t\tprintf(KRED \"✗ \045s\\\\n\" RESET, result);\n"
   printf "\t}\n"
   printf "\telse {\n"
   printf "\t\tprintf(\"-_-_-_-_-_-_-_,------,      o \\\\n\");\n"
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
   printf "\t\tprintf(\"_-_-_-_-_-_-_-  \\\\\"\\\\\"  \\\\\"\\\\\" \\\\n\");\n"
   printf "\t\tprintf(KGRN \" ✓ ALL TESTS PASSED \\\\n\" RESET);\n"
   printf "\t}\n"
-  printf "\tprintf(\"Tests run: %d\\\\n\", tests_run);\n"
+  printf "\tprintf(\"Tests run: \045d\\\\n\", tests_run);\n"
   printf "\treturn result != 0;\n"
   printf "}\n"
 
