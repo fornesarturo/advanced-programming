@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "minunit.h"
 #include "keyboard_row.h"
 
@@ -13,13 +15,30 @@
 #define RESET "\033[0m"
 
 int tests_run = 0;
-static char * test_unit() {
-	mu_assert("error, testUnit 1 != 1", 0 != 1);
+static char * example_test() {
+    char temp_input[4][7] = {"Hello", "Alaska", "Dad", "Peace"};
+    int size = 4;
+    char **input = malloc(size * sizeof(char *));
+    for (int i = 0; i < size; i++) {
+        input[i] = malloc(256 * sizeof(char));
+        strcpy(input[i], temp_input[i]);
+    }
+    int return_size;
+    char **output = find_words(input, 4, &return_size);
+    printf("Array of size: %d [", return_size);
+    for(int i = 0; i < return_size; i++) {
+        printf("%s", output[i]);
+        if (i < return_size - 1) {
+            printf(", ");
+        }
+    }
+    printf("]\n");
+	mu_assert("Wrong output!", output != NULL && output[0][0] == 'A' && output[1][0] == 'D');
 	return 0;
 }
 
 static char * all_tests() {
-	mu_run_test(test_unit);
+	mu_run_test(example_test);
 	return 0;
 }
 int main(int argc, char **argv) {
