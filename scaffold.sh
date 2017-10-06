@@ -107,7 +107,7 @@ echo "#include <stdlib.h>
 
 int main(int argc, char **argv) {
     /* Start your code here */
-    printf(\"Hello from main\\\\n\");
+    printf(\"Hello from main\\\n\");
     return 0;
 }" > main.c
 
@@ -133,34 +133,39 @@ chmod 755 integrationtest.tcl
 
 {
   echo "LIB := \$(shell find ./lib -name '*.o')"
-  printf "all:\n"
-  # Make command complains about spaces :(
-  # fix: http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
-  # http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
-  printf "\t gcc -c ${MODULE_NAME}.c\n"
-  printf "\t gcc -c main.c\n"
-  printf "\t gcc -o main.exe ${MODULE_NAME}.o main.o\n"
-  printf "\n"
+  echo "all:"
+  echo -e "\t gcc -c ${MODULE_NAME}.c"
+  echo -e "\t gcc -c main.c"
+  echo -e "\t gcc -o ${MODULE_NAME}.exe ${MODULE_NAME}.o main.o \$(LIB)"
+  echo ""
 
-  printf "test_${MODULE_NAME}: clean\n"
-  printf "\t gcc -c ${MODULE_NAME}.c\n"
-  printf "\t gcc -c test_${MODULE_NAME}.c\n"
-  printf "\t gcc -o test_${MODULE_NAME}.exe ${MODULE_NAME}.o test_${MODULE_NAME}.o\n"
-  printf "\t ./test_${MODULE_NAME}.exe\n"
-  printf "\n"
+  echo "test_${MODULE_NAME}: clean"
+  echo -e "\t gcc -c ${MODULE_NAME}.c"
+  echo -e "\t gcc -c test_${MODULE_NAME}.c"
+  echo -e "\t gcc -o test_${MODULE_NAME}.exe ${MODULE_NAME}.o test_${MODULE_NAME}.o"
+  echo -e "\t ./test_${MODULE_NAME}.exe"
+  echo ""
 
-  printf "test:\t test_${MODULE_NAME}\n"
-  printf "\n"
+  echo -e "test:\t test_${MODULE_NAME}"
+  echo ""
 
-  printf "clean:\n"
-  printf "\t rm *.out *.o *.exe *.gch || exit 0\n"
-  printf "\n"
+  echo "clean:"
+  echo -e "\t rm *.out *.o *.exe || exit 0"
+  echo ""
 
-  printf "run:\n"
-  printf "\t gcc -c ${MODULE_NAME}.c\n"
-  printf "\t gcc -c main.c\n"
-  printf "\t gcc -o main.exe ${MODULE_NAME}.o main.o\n"
-  printf "\t ./main.exe\n"
+  echo "${MODULE_NAME}: clean"
+  echo -e "\t gcc -c ${MODULE_NAME}.c"
+  echo -e "\t gcc -c main.c"
+  echo -e "\t gcc -o ${MODULE_NAME}.exe ${MODULE_NAME}.o main.o \$(LIB)"
+  echo ""
+
+  echo  "run: ${MODULE_NAME}"
+  echo -e "\t ./${MODULE_NAME}.exe"
+  echo ""
+
+  echo -e "runtest: ${MODULE_NAME}"
+  echo -e "\t ./integrationtest.tcl ./${MODULE_NAME}.exe"
+  echo ""
 
 } > Makefile
 
