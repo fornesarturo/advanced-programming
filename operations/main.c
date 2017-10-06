@@ -3,7 +3,7 @@
 #include <string.h>
 #include "operations.h"
 #define MAX_LENGTH 10
-#define print_debug(msg) do { char * value = getenv("OPER_DEBUG"); if( !strcmp(value, "t") ) printf("%s", msg); } while(0)
+#define print_debug(msg) do { char * value = getenv("OPER_DEBUG"); if( value != NULL && !strcmp(value, "t") ) printf("%s", msg); } while(0)
 
 // To set the respective environment variables:
 //  export OPER_DEBUG=t
