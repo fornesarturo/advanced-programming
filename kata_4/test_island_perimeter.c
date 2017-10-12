@@ -24,14 +24,7 @@ static char * test_unit() {
 		island_pointer[i] = island[i];
 	}
 	int expected = 16;
-	for(i = 0; i < rows; i++) {
-		for(int j = 0; j < cols; j++) {
-			printf("%d ", island_pointer[i][j]);
-		}
-		printf("\n");
-	}
 	int result = island_perimeter(island_pointer, rows, cols);
-	printf("Perimeter = %d\n", result);
 	mu_assert("Wrong Perimeter.", result == expected);
 	return 0;
 }
