@@ -107,7 +107,7 @@ echo "#include <stdlib.h>
 
 int main(int argc, char **argv) {
     /* Start your code here */
-    printf(\"Hello from main\\\n\");
+    printf(\"Hello from main\\n\");
     return 0;
 }" > main.c
 
