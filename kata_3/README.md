@@ -1,9 +1,12 @@
 
 # Keyboard Row
 
-Given a List of words, return the words that can be typed using letters of alphabet on only one row's of American keyboard. 
+Given a List of words, return the words that can be typed using letters of alphabet on only one row's of American keyboard.
 
-https://leetcode.com/problems/keyboard-row/description/
+![keyboard](https://leetcode.com/static/images/problemset/keyboard.png)
+
+
+[Leetcode page](https://leetcode.com/problems/keyboard-row/description/)
 
 ### How to compile
 ```bash
@@ -40,4 +43,3 @@ gcc -c program-that-depends-of-module1.c
 gcc -o program.out module1.o program-that-depends-of-module1.o
 ./program.out
 ```
-

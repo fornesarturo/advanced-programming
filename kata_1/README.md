@@ -2,7 +2,7 @@
 
 Given a string of various words, give the length of the last of these words.
 ****
- 
+
 ### How to compile
 ```bash
 make
