@@ -10,6 +10,7 @@ proc reset {} {exec tput sgr0 > /dev/tty}
 
 #Put your test case here
 
+# 2x2
 eval spawn [lrange $argv 0 end]
 
 expect "Size of row: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
@@ -23,6 +24,7 @@ expect "island 1:" {foreground green; puts "PASSED";reset} default {foreground r
 send "1,1\r"
 expect "Perimeter = 8" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 
+# 3x2
 eval spawn [lrange $argv 0 end]
 expect "Size of row: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 send "3\r"
@@ -36,6 +38,7 @@ expect "island 2:" {foreground green; puts "PASSED";reset} default {foreground r
 send "1,1\r"
 expect "Perimeter = 10" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 
+# Error 2x1
 eval spawn [lrange $argv 0 end]
 expect "Size of row: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 send "2\r"
