@@ -3,27 +3,40 @@
 #include <string.h>
 #include "qsort.h"
 
+#define MAX_LENGTH_ORDER 20
+#define STUDENTS_LENGTH 3
+
+
 typedef struct s {
 	char *name;
 	int id;
 } Student;
 
-int cmp_names (const void *element1, const void *element2) {
+int cmp_student (const void *element1, const void *element2, int attribute) {
 	Student *student1 = (Student *) element1;
 	Student *student2 = (Student *) element2;
-	return strcmp(student1->name, student2->name);
+	switch(attribute) {
+		case 0: // Name
+				return strcmp(student1->name, student2->name);
+		case 1: // Id
+				return student1->id - student2->id;
+	}
+}
+
+int cmp_names (const void *element1, const void *element2) {
+	return cmp_student (element1, element2, 0);
 }
 
 int cmp_ids (const void *element1, const void *element2) {
-	Student *student1 = (Student *) element1;
-	Student *student2 = (Student *) element2;
-	return student1->id - student2->id;
+	return cmp_student (element1, element2, 1);
 }
 
 int main(int argc, char **argv) {
-	Student group[3];
-	int i;
-	char order[20];
+	Student group[STUDENTS_LENGTH];
+	Student key;
+	Student * found_student;
+	int i, needed_student;
+	char order[MAX_LENGTH_ORDER];
 
 	group[0].name = strdup("Juanito");
 	group[0].id = 17;
@@ -38,16 +51,27 @@ int main(int argc, char **argv) {
 	scanf("%s", order);
 
 	if (!strcmp(order, "name")) {
-		qsort(group, 3, sizeof(Student), cmp_names);
+		qsort(group, STUDENTS_LENGTH, sizeof(Student), cmp_names);
 	}
 
 	if (!strcmp(order, "id")) {
-		qsort(group, 3, sizeof(Student), cmp_ids);
+		qsort(group, STUDENTS_LENGTH, sizeof(Student), cmp_ids);
 	}
 
-	for (i = 0; i < 3; i++) {
+	for (i = 0; i < STUDENTS_LENGTH; i++) {
 		printf("Student %s %d\n", group[i].name, group[i].id);
 	}
 
+	printf("Which is the id?: ");
+	scanf("%d", &needed_student);
+	key.id = needed_student;
+	
+	found_student = bsearch(&key, group, STUDENTS_LENGTH, sizeof(Student), cmp_ids);
+	if (found_student != NULL) {
+		printf("Student %s %d\n", found_student->name, found_student->id);
+	} 
+	else {
+		printf("Student with id %d not found\n", needed_student);
+	}
     return 0;
 }

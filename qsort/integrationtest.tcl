@@ -11,11 +11,14 @@ proc reset {} {exec tput sgr0 > /dev/tty}
 eval spawn [lrange $argv 0 end]
 
 expect "Give me the order: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
-#expect "What is the id:" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 send "name\r"
 expect "Student Juanito 17" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 expect "Student Mariana 2" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 expect "Student Pedro 4" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Which is the id?: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+send "3\r"
+expect "Student with id 3 not found" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+
 
 eval spawn [lrange $argv 0 end]
 expect "Give me the order: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
@@ -23,4 +26,8 @@ send "id\r"
 expect "Student Mariana 2" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 expect "Student Pedro 4" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 expect "Student Juanito 17" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Which is the id?: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+send "17\r"
+expect "Student Juanito 17" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+
 
