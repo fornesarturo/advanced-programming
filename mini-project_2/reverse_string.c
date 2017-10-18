@@ -13,15 +13,17 @@ char * reverse_string(char * string) {
 	int size = 0, i;
 	char tmp;
 
-	for (; *(last + 1) != '\0'; last++) {
+	for (; *last != '\0'; last++) {
 		size++;
-	} size++;
+	}
+
+	last--;
 	
 	if (size == 1) {
 		return string;
 	}
 
-	for (; i <= size/2; i++) {
+	for (i = 0; i < size/2; i++) {
 		tmp = *last;
 	   	*last = modifiable_string[i];
 		modifiable_string[i] = tmp;
