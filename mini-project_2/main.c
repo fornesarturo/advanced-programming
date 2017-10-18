@@ -17,13 +17,13 @@ int main(int argc, char **argv) {
 	printf("Enter the string you want reversed: \n");
 	scanf("%s", string);
 	
-	sprintf(message, "%s\n", string);
+	sprintf(message, "string=%s\n", string);
 	print_debug(message);
 
 	char * reverse = reverse_string(string);
 
 	if (reverse != NULL) {
-		printf("Reversed %s\n", reverse);	
+		printf("Reversed: %s\n", reverse);	
 	}
 	
 	return 0;
