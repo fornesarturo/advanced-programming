@@ -15,7 +15,8 @@
 #define RESET "\033[0m"
 
 int tests_run = 0;
-static char * test_unit() {
+
+static char * test_odd() {
 	char * string = "hello";
 	char * reverse = reverse_string(string);
 	mu_assert("Wrong string!", reverse != NULL && string[0] == reverse[4] && string[1] == reverse[3] && string[2] == reverse[2]);
@@ -23,8 +24,38 @@ static char * test_unit() {
 	return 0;
 }
 
+static char * test_even() {
+	char * string = "greeting";
+	char * reverse = reverse_string(string);
+	printf("Reverse: %s\n", reverse);
+	mu_assert("Wrong string!", reverse != NULL && string[0] == reverse[7]);
+	mu_assert("Wrong string!", reverse != NULL && string[1] == reverse[6]);
+	mu_assert("Wrong string!", reverse != NULL && string[2] == reverse[5]);
+	mu_assert("Wrong string!", reverse != NULL && string[3] == reverse[4]);
+	return 0;
+}
+
+static char * test_1_char() {
+	char * string = "hi";
+	char * reverse = reverse_string(string);
+	printf("Reverse: %s\n", reverse);
+	mu_assert("Wrong string!", reverse != NULL && reverse[0] == string[1]);
+	mu_assert("Wrong string!", reverse != NULL && reverse[1] == string[0]);
+	return 0;
+}
+
+static char * test_empty() {
+	char * string = "";
+	char * reverse = reverse_string(string);
+	mu_assert("Wrong string!", reverse != NULL && reverse[0] == string[0] && reverse[0] == '\0');
+	return 0;
+}
+
 static char * all_tests() {
-	mu_run_test(test_unit);
+	mu_run_test(test_odd);
+	mu_run_test(test_even);
+	mu_run_test(test_1_char);
+	mu_run_test(test_empty);
 	return 0;
 }
 int main(int argc, char **argv) {
