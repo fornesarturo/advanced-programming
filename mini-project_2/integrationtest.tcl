@@ -7,10 +7,16 @@ array set color {black 0 red 1 green 2 yellow 3 blue 4 magenta 5 cyan 6 white 7}
 proc foreground x {exec tput -S << "setaf $::color($x)" > /dev/tty}
 proc background x {exec tput -S << "setab $::color($x)" > /dev/tty}
 proc reset {} {exec tput sgr0 > /dev/tty}
-#Put your test case here
+
 eval spawn [lrange $argv 0 end]
-expect "Hello from main" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
-#expect "What is the id:" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
-#send "0101\r"
-#expect "name: Angel Perez, semestre: 6" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+
+expect "Enter the string you want reversed: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+send "paradigm\r"
+expect "Reversed: mgidarap" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+
+eval spawn [lrange $argv 0 end]
+
+expect "Enter the string you want reversed: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+send "reverse\r"
+expect "Reversed: esrever" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 
