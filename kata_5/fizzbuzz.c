@@ -9,23 +9,36 @@
   * For multiples of three, instead, output 'Fizz', likewise for multiples of
   * five, output 'Buzz', and for both output 'FizzBuzz'.
   * @param:
-  *   n - limit number
+  *   n - limit number.
+  *   return_size - size of the returning char ** .
   * @return:
-  *   (maybe) char ** - list of strings of the series.
+  *   char ** - list of strings of the series.
 **/
-void fizzbuzz (int n) {
+char ** fizzbuzz (int n, int * return_size) {
     int i;
     char print[11];
+    char ** result = (char **) malloc(sizeof(char * ) * n);
     for (i = 1; i <= n; i++) {
-        if (i % 3 == 0 || i % 5 == 0)
-            if (i % 5 != 0)
+        if (i % 3 == 0 || i % 5 == 0) {
+            if (i % 5 != 0) {
                 strcpy(print, "Fizz");
-            else if (i % 3 != 0)
+                result[i - 1] = (char *) malloc(sizeof(char) * 5);
+            }
+            else if (i % 3 != 0) {
                 strcpy(print, "Buzz");
-            else
+                result[i - 1] = (char *) malloc(sizeof(char) * 5);
+            }
+            else {
                 strcpy(print, "FizzBuzz");
-        else
+                result[i - 1] = (char *) malloc(sizeof(char) * 9);
+            }
+        }
+        else {
             sprintf(print, "%d", i);
-        printf("%s\n", print);
+            result[i - 1] = (char *) malloc(sizeof(char) * strlen(print));
+        }
+        strcpy(result[i - 1], print);
     }
+    *return_size = n;
+    return result;
 }

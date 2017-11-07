@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "minunit.h"
 #include "fizzbuzz.h"
 
@@ -14,8 +16,13 @@
 
 int tests_run = 0;
 static char * test_unit() {
-    fizzbuzz(15);
-	mu_assert("error, testUnit 1 != 1", 1 == 1);
+    int * size = (int *) malloc(sizeof(int));
+    char ** result = fizzbuzz(15, size);
+    int i = 0;
+    for (i = 0; i < *size; i++) {
+        printf("%s\n", result[i]);
+    }
+	mu_assert("error, testUnit 1 != 1", result != NULL && strcmp(result[14], "FizzBuzz") == 0);
 	return 0;
 }
 
