@@ -22,7 +22,14 @@ static char * test_unit() {
     for (i = 0; i < *size; i++) {
         printf("%s\n", result[i]);
     }
-	mu_assert("error, testUnit 1 != 1", result != NULL && strcmp(result[14], "FizzBuzz") == 0);
+	mu_assert("Wrong output 14", result != NULL && strcmp(result[14], "FizzBuzz") == 0);
+	mu_assert("Wrong output 5", result != NULL && strcmp(result[5], "Fizz") == 0);
+	mu_assert("Wrong output 4", result != NULL && strcmp(result[4], "Buzz") == 0);
+	mu_assert("Wrong output 9", result != NULL && strcmp(result[9], "Buzz") == 0);
+	mu_assert("Wrong output 8", result != NULL && strcmp(result[8], "Fizz") == 0);
+	mu_assert("Wrong output 7", result != NULL && strcmp(result[7], "8") == 0);
+    free(size);
+    free(result);
 	return 0;
 }
 
