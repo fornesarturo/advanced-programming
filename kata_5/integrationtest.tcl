@@ -7,10 +7,32 @@ array set color {black 0 red 1 green 2 yellow 3 blue 4 magenta 5 cyan 6 white 7}
 proc foreground x {exec tput -S << "setaf $::color($x)" > /dev/tty}
 proc background x {exec tput -S << "setab $::color($x)" > /dev/tty}
 proc reset {} {exec tput sgr0 > /dev/tty}
+
 #Put your test case here
 eval spawn [lrange $argv 0 end]
-expect "Hello from main" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
-#expect "What is the id:" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
-#send "0101\r"
-#expect "name: Angel Perez, semestre: 6" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
 
+expect "Value of n: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+send "3\r"
+expect "1" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "2" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Fizz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+
+eval spawn [lrange $argv 0 end]
+
+expect "Value of n: " {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+send "15\r"
+expect "1" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "2" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Fizz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "4" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Buzz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Fizz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "7" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "8" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Fizz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Buzz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "11" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "Fizz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "13" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "14" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
+expect "FizzBuzz" {foreground green; puts "PASSED";reset} default {foreground red;puts "FAILED";reset}
