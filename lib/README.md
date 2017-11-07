@@ -1,5 +1,7 @@
 
-# lib
+# Library of Data Structures
+
+Actually, just a Dictionary.
 
 ### How to compile
 ```bash
@@ -36,4 +38,3 @@ gcc -c program-that-depends-of-module1.c
 gcc -o program.out module1.o program-that-depends-of-module1.o
 ./program.out
 ```
-

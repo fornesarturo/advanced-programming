@@ -1,5 +1,6 @@
+# Dining Philosophers
 
-# thread
+Approach to Dining Philosophers problem with pthreads.
 
 ### How to compile
 ```bash
@@ -36,4 +37,3 @@ gcc -c program-that-depends-of-module1.c
 gcc -o program.out module1.o program-that-depends-of-module1.o
 ./program.out
 ```
-

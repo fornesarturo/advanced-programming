@@ -1,5 +1,7 @@
 # Calculate Days
 
+Given a month and a day in that month return the days passed from the start of the year to that particular date.
+
 ### How to compile
 ```bash
 make run
