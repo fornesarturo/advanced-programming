@@ -5,7 +5,13 @@
 /* Add function signatures here */
 
 int main(int argc, char **argv) {
-    /* Start your code here */
-    printf("Hello from main\n");
+    int n;
+    printf("Value of n: "); scanf("%d", &n);
+    int * size = (int *) malloc(sizeof(int));
+    char ** result = fizzbuzz(n, size);
+    int i = 0;
+    for (i = 0; i < *size; i++) {
+        printf("%s\n", result[i]);
+    }
     return 0;
 }
