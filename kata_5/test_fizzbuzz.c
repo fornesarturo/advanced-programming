@@ -14,6 +14,7 @@
 
 int tests_run = 0;
 static char * test_unit() {
+    fizzbuzz(15);
 	mu_assert("error, testUnit 1 != 1", 1 == 1);
 	return 0;
 }
