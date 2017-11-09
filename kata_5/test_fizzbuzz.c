@@ -19,9 +19,6 @@ static char * test_unit() {
     int * size = (int *) malloc(sizeof(int));
     char ** result = fizzbuzz(15, size);
     int i = 0;
-    for (i = 0; i < *size; i++) {
-        printf("%s\n", result[i]);
-    }
 	mu_assert("Wrong output 14", result != NULL && strcmp(result[14], "FizzBuzz") == 0);
 	mu_assert("Wrong output 5", result != NULL && strcmp(result[5], "Fizz") == 0);
 	mu_assert("Wrong output 4", result != NULL && strcmp(result[4], "Buzz") == 0);
