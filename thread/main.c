@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <semaphore.h>
-#define NUM_THREADS	10
+#define NUM_THREADS	12
 
 sem_t forks[NUM_THREADS];
 sem_t chairs;
