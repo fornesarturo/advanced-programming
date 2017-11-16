@@ -1,6 +1,8 @@
 # Vim swp files
 *.swp
 
+.vscode/
+
 # Prerequisites
 *.d
 
