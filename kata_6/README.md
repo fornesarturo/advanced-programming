@@ -208,6 +208,8 @@ Point f)
 At this point there aren't any values that aren't NULL, so the algorithm ends and returns the root of the new tree.
 ```
 
+This algorithms complexity is O(n), where n is the number of nodes in the bigger tree.
+
 ## Compilation instructions
 
 ### How to compile
